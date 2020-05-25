@@ -115,6 +115,10 @@ $shadow: 0 0 5px 0
       box-shadow: $shadow;
       border-radius: 100%;
       cursor: pointer;
+
+      &:hover {
+        background: #ff6;
+      }
     }
 
     .router-link-active {

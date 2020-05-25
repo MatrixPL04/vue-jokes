@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-    <app-header title="About vueJoke" subTitle="Description and information about this page."></app-header>
+    <app-header title="Your Favoutite" subTitle="All the jokes you like will appear here."></app-header>
   </div>
 </template>
 

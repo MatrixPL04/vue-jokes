@@ -53,6 +53,14 @@ export default {
     font-size: 0.8rem;
     user-select: none;
     padding-top: 0.5rem;
+
+    a {
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
 }
 </style>

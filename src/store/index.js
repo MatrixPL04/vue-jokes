@@ -5,17 +5,21 @@ import VueResource from 'vue-resource'
 Vue.use(Vuex)
 Vue.use(VueResource)
 
-let API_URL = "https://sv443.net/jokeapi/v2/joke/Any?blacklistFlags=nsfw,religious,political,sexist"
+let API_URL = "https://sv443.net/jokeapi/v2/joke/Any?blacklistFlags=nsfw,religious,political,racist,sexist"
 
 export default new Vuex.Store({
   state: {
+    joke: null
   },
   mutations: {
+    Joke(state, data) {
+      state.joke = data
+    }
   },
   actions: {
-    Jokes() {
+    Joke() {
       Vue.http.get(`${API_URL}`)
-        .then(res => this.state.jokes = res.body)
+        .then(res => this.commit("Joke", res.body))
     }
   },
   modules: {
