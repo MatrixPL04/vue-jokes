@@ -22,7 +22,10 @@
           <div class="content">
             <div v-if="Joke.type == 'twopart'">
               {{Joke.setup}}
-              {{Joke.delivery}}
+              <div @click="showResult = true" v-if="!showResult" class="showResult">
+                <i class="fas fa-angle-down"></i>
+              </div>
+              <div v-if="showResult" class="result">{{Joke.delivery}}</div>
             </div>
             <div v-else>{{Joke.joke}}</div>
           </div>
@@ -31,7 +34,7 @@
               <i class="fas fa-thumbs-down"></i>
               Dislike
             </button>
-            <button @click="likeIt()">
+            <button @click="likeIt(Joke.id)">
               <i class="fas fa-thumbs-up"></i>
               Like
             </button>
@@ -51,21 +54,42 @@
 </template>
 
 <script>
-import Vue from "vue";
-
 import card from "@/components/card.vue";
 import appHeader from "@/components/header.vue";
 
 export default {
+  data() {
+    return {
+      showResult: false,
+      isRated: false
+    };
+  },
   created() {
+    if (!this.$cookies.isKey("favourite")) {
+      this.$cookies.set("favourite", "");
+    }
+
     this.getJoke();
   },
   methods: {
     getJoke() {
+      this.showResult = false;
+      this.isRated = false;
       this.$store.dispatch("Joke");
     },
-    likeIt() {
-      alert("You like it!");
+    likeIt(id) {
+      this.isRated = true;
+      alert("You like this post!")
+      let favJokes = this.$cookies.get("favourite");
+      if (favJokes != null) {
+        favJokes = favJokes.split(",");
+        if (!favJokes.includes(id.toString())) {
+          favJokes.push(id);
+          this.$cookies.set("favourite", favJokes);
+        }
+      } else {
+        this.$cookies.set("favourite", id);
+      }
     }
   },
   computed: {
@@ -142,6 +166,14 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+
+    .showResult {
+      margin-top: 1rem;
+    }
+
+    .result {
+      margin-top: 1rem;
+    }
 
     &::after {
       content: "";

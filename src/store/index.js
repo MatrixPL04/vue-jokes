@@ -5,7 +5,7 @@ import VueResource from 'vue-resource'
 Vue.use(Vuex)
 Vue.use(VueResource)
 
-let API_URL = "https://sv443.net/jokeapi/v2/joke/Any?blacklistFlags=nsfw,religious,political,racist,sexist"
+let API_URL = require("../config.json")["API_URL"]
 
 export default new Vuex.Store({
   state: {
@@ -17,9 +17,14 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    Joke() {
-      Vue.http.get(`${API_URL}`)
-        .then(res => this.commit("Joke", res.body))
+    Joke(id) {
+      if (isNaN(id)) {
+        Vue.http.get(`${API_URL}`)
+          .then(res => this.commit("Joke", res.body))
+      } else {
+        Vue.http.get(`${API_URL}&idRange=${id}`)
+          .then(res => this.commit("Joke", res.body))
+      }
     }
   },
   modules: {

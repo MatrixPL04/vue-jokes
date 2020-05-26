@@ -1,4 +1,4 @@
-# jokes
+# VueJokes
 
 ## Project setup
 ```
