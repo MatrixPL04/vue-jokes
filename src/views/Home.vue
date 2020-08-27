@@ -61,8 +61,11 @@ export default {
   data() {
     return {
       showResult: false,
-      isRated: false
+      isRated: false,
     };
+  },
+  beforeCreate() {
+    this.$store.state.joke = null
   },
   created() {
     if (!this.$cookies.isKey("favourite")) {
@@ -79,7 +82,7 @@ export default {
     },
     likeIt(id) {
       this.isRated = true;
-      alert("You like this post!")
+      alert("You like this post!");
       let favJokes = this.$cookies.get("favourite");
       if (favJokes != null) {
         favJokes = favJokes.split(",");
@@ -90,17 +93,17 @@ export default {
       } else {
         this.$cookies.set("favourite", id);
       }
-    }
+    },
   },
   computed: {
     Joke() {
       return this.$store.state.joke;
-    }
+    },
   },
   components: {
     card,
-    appHeader
-  }
+    appHeader,
+  },
 };
 </script>
 
@@ -169,6 +172,12 @@ export default {
 
     .showResult {
       margin-top: 1rem;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+
+      &:hover {
+        transform: scale(1.3);
+      }
     }
 
     .result {

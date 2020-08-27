@@ -13,8 +13,8 @@
         <router-link to="/favourite" tag="div" class="favourite">
           <i class="fas fa-star"></i>
         </router-link>
-        <router-link to="/about" tag="div" class="about">
-          <i class="fas fa-paragraph"></i>
+        <router-link to="/github" tag="div" class="github">
+          <i class="fab fa-github"></i>
         </router-link>
       </div>
     </transition>
@@ -130,7 +130,7 @@ $shadow: 0 0 5px 0
       top: #{$circleSize / 18};
       right: #{$circleSize / 3};
     }
-    .about {
+    .github {
       position: absolute;
       top: #{$circleSize / 3};
       right: #{$circleSize / 18};

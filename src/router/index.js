@@ -10,9 +10,11 @@ Vue.use(VueRouter)
     component: () => import('../views/Home.vue')
   },
   {
-    path: '/about',
-    name: 'About',
-    component: () => import('../views/About.vue')
+    path: '/github',
+    name: 'github',
+    beforeEnter() {
+      window.location.href = "https://github.com/MatEE404"
+    }
   },
   {
     path: '/favourite',

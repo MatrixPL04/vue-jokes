@@ -26,7 +26,5 @@ export default new Vuex.Store({
           .then(res => this.commit("Joke", res.body))
       }
     }
-  },
-  modules: {
   }
 })
